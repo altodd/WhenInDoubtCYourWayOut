@@ -1,3 +1,5 @@
+#include "UsefulLogicFunctions.h"
+
 Probability::Probability(double prob = 0.0, Choice check = Choice::M) {
 	probability = prob;
 	guess = check;
@@ -9,6 +11,10 @@ double Probability::getProb() {
 
 Choice Probability::getChoice() {
 	return guess;
+}
+
+bool sortFun(Probability i, Probability j) {
+	return i.getProb() < j.getProb();
 }
 
 void calcProb(const vector<int>& choices, double& probM, double& probW, double& probB) {

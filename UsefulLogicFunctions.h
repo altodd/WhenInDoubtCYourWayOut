@@ -16,9 +16,7 @@ private:
 
 void calcProb(const vector<int>& choices, double& probM, double& probW, double& probB);
 
-bool sortFun(Probability i, Probability j) {
-	return i.getProb() < j.getProb();
-}
+bool sortFun(Probability i, Probability j);
 
 Choice makeGuess(const double& probM, const double& probW, const double& probB);
 
