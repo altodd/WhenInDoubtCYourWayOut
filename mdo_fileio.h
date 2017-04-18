@@ -118,6 +118,7 @@ namespace mdo { // Marcus Overzet's namespace
         int get_max_score() const { return max_score; };
         const int get_max_size_name() const { return max_size_name; };
         const int get_num_high_scores() const { return num_high_scores; };
+        int get_num_read_scores() const { return scores.size(); };
         const String get_default_score_file() const { return default_score_file; };
     
     

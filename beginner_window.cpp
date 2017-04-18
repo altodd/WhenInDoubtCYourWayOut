@@ -11,8 +11,7 @@
 
 #include "beginner_window.h"
 #include "UsefulLogicFunctions.h"
-#include "mdo_fileio.h"
-#include "score_window.h"
+#include "Score_Display.h"
 
 using namespace Graph_lib;
 
@@ -21,16 +20,16 @@ using namespace Graph_lib;
 beginner_window::beginner_window(Point xy, int w, int h, const string& title, string playername) :
 	Window(xy, w, h, title),
 
-	Maroon(Point(x_max() / 3, 500), 70, 20, "Band", cb_maroon),
-	White(Point(x_max() / 2, 500), 70, 20, "Team", cb_white),
-	Black(Point(x_max() * 2 / 3, 500), 70, 20, "12th Man", cb_black),
+	Maroon(Point(x_max() / 5, 200), 70, 20, "Band", cb_maroon),
+	White(Point(x_max() * 2 / 5, 200), 70, 20, "Team", cb_white),
+	Black(Point(x_max() * 3 / 5, 200), 70, 20, "12th Man", cb_black),
 
-	scoreDisp(Point(0, 25), 150, 25, "Score: "),
-	computer_correct(Point(x_max() - 200, 25), 150, 25, "Percent I have guessed right: "),
+	scoreDisp(Point(x_max() - 70, 20), 150, 25, "Score: "),
+	computer_correct(Point(x_max() - 300, 25), 150, 25, "Percent I have guessed right: "),
 	choices_to_go(Point(x_max() - 600, 25), 150, 25, "Choices to go: "),
 
-	observation(Point(x_max() / 2, 200), "Make some choices so that I can get you figured out"),
-	guessing(Point(x_max() / 2, 200), "I will guess what you are going to select next, now"),
+	observation(Point(x_max() / 2, 500), "Make some choices so that I can get you figured out"),
+	guessing(Point(x_max() / 2, 500), "I will guess what you are going to select next, now"),
 
 	observation_period{ true },
 	playername{ playername },
@@ -42,7 +41,6 @@ beginner_window::beginner_window(Point xy, int w, int h, const string& title, st
 	attach(Maroon);
 	attach(White);
 	attach(Black);
-	choices_to_go.put(intToStr(rounds));
 }
 
 //------------------------------------------------------------------------------
@@ -100,9 +98,9 @@ void beginner_window::maroon()
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
-			choices_to_go.put(intToStr(rounds));
 		}
 		Fl::redraw();
+        //button_pushed = true; // ??? this was in advanced_window.cpp, not here
 	}
 	else {
 		calcProb(choices, probM, probW, probB);
@@ -121,11 +119,15 @@ void beginner_window::maroon()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-			mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
+            /* EDITS BEGIN HERE */
+            Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
+            missionScore.add(track_score);
+			/*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
 			fin_score.mdo::score_io::add(track_score);
 			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
 			missionScore.show_scores();
-			missionScore.wait_for_button();
+			missionScore.wait_for_button();*/
+			button_pushed = true;
 			hide();
 		}
 		Fl::redraw();
@@ -147,7 +149,6 @@ void beginner_window::white()
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
-			choices_to_go.put(intToStr(rounds));
 		}
 		Fl::redraw();
 	}
@@ -168,12 +169,16 @@ void beginner_window::white()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-			mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
-			fin_score.mdo::score_io::add(track_score);
-			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-			missionScore.show_scores();
-			missionScore.wait_for_button();
+            /* EDITS BEGIN HERE */
+            Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
+            missionScore.add(track_score);
+            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
+             fin_score.mdo::score_io::add(track_score);
+             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
+             missionScore.show_scores();
+             missionScore.wait_for_button();*/
 			hide();
+			button_pushed = true;
 		}
 		Fl::redraw();
 	}
@@ -194,7 +199,6 @@ void beginner_window::black()
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
-			choices_to_go.put(intToStr(rounds));
 		}
 		Fl::redraw();
 	}
@@ -215,11 +219,15 @@ void beginner_window::black()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-			mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
-			fin_score.mdo::score_io::add(track_score);
-			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-			missionScore.show_scores();
-			missionScore.wait_for_button();
+            /* EDITS BEGIN HERE */
+            Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
+            missionScore.add(track_score);
+            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
+             fin_score.mdo::score_io::add(track_score);
+             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
+             missionScore.show_scores();
+             missionScore.wait_for_button();*/
+			button_pushed = true;
 			hide();
 		}
 		Fl::redraw();
