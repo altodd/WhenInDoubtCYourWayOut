@@ -11,8 +11,7 @@
 
 #include "intermediate_window.h"
 #include "UsefulLogicFunctions.h"
-#include "mdo_fileio.h"
-#include "score_window.h"
+#include "Score_Display.h"
 
 using namespace Graph_lib;
 
@@ -120,11 +119,15 @@ void intermediate_window::maroon()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-			mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\intermediate.txt", 640 };
-			fin_score.mdo::score_io::add(track_score);
-			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-			missionScore.show_scores();
-			missionScore.wait_for_button();
+            /* EDITS BEGIN HERE */
+            Score_Display_window missionScore(Point(200,50),1200,700,1,playername);
+            missionScore.add(track_score);
+            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 640 };
+             fin_score.mdo::score_io::add(track_score);
+             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
+             missionScore.show_scores();
+             missionScore.wait_for_button();*/
+            // button_pushed = true; // ??? this was in beginner_window, not here
 			hide();
 		}
 		Fl::redraw();
@@ -168,11 +171,15 @@ void intermediate_window::white()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-			mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\intermediate.txt", 640 };
-			fin_score.mdo::score_io::add(track_score);
-			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-			missionScore.show_scores();
-			missionScore.wait_for_button();
+            /* EDITS BEGIN HERE */
+            Score_Display_window missionScore(Point(200,50),1200,700,1,playername);
+            missionScore.add(track_score);
+            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 640 };
+             fin_score.mdo::score_io::add(track_score);
+             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
+             missionScore.show_scores();
+             missionScore.wait_for_button();*/
+            // button_pushed = true; // ??? this was in beginner_window, not here
 			hide();
 		}
 		Fl::redraw();
@@ -216,11 +223,15 @@ void intermediate_window::black()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-			mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\intermediate.txt", 640 };
-			fin_score.mdo::score_io::add(track_score);
-			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-			missionScore.show_scores();
-			missionScore.wait_for_button();
+            /* EDITS BEGIN HERE */
+            Score_Display_window missionScore(Point(200,50),1200,700,1,playername);
+            missionScore.add(track_score);
+            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 640 };
+             fin_score.mdo::score_io::add(track_score);
+             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
+             missionScore.show_scores();
+             missionScore.wait_for_button();*/
+            // button_pushed = true; // ??? this was in beginner_window, not here
 			hide();
 		}
 		Fl::redraw();

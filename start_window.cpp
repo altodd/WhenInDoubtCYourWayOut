@@ -15,7 +15,7 @@
 #include "advanced_window.h"
 #include "expert_window.h"
 #include "missionImpossible_window.h"
-#include "score_window.h"
+#include "Score_Display.h"
 
 using namespace Graph_lib;
 //------------------------------------------------------------------------------
@@ -160,10 +160,11 @@ void start_window::beginner()
 {
     button_pushed = true;
 	beginner_window win2(Point(200,50),1200,700,"BEGINNER", playername);
-	score_window begginnerScore(Point(200, 50), 1200, 700, "Beginner Scores", 1, playername);
-	begginnerScore.show_scores();
-	begginnerScore.wait_for_button();
-	win2.wait_for_button();
+	Score_Display_window begginnerScore(Point(200, 50), 1200, 700, 0, playername);
+    win2.wait_for_button();
+	//begginnerScore.show_scores();     // both of these are taken care of in the
+	//begginnerScore.wait_for_button(); // constructor
+		
 }
 //-------------------------------------------------------------------------------
 
@@ -173,10 +174,10 @@ void start_window::intermediate()
 {
     button_pushed = true;
 	intermediate_window win3(Point(200,50),1200,700,"INTERMEDIATE", playername);
-	score_window intermediateScore(Point(200, 50), 1200, 700, "Intermediate Scores", 2, playername);
+	Score_Display_window intermediateScore(Point(200, 50), 1200, 700, 1, playername);
     win3.wait_for_button();
-	intermediateScore.show_scores();
-	intermediateScore.wait_for_button();
+	//intermediateScore.show_scores();
+	//intermediateScore.wait_for_button();
 		
 }
 //-------------------------------------------------------------------------------
@@ -187,10 +188,10 @@ void start_window::advanced()
 {
     button_pushed = true;
 	advanced_window win4(Point(200,50),1200,700,"ADVANCED", playername);
-	score_window advancedScore(Point(200, 50), 1200, 700, "Advanced Scores", 3, playername);
+	Score_Display_window advancedScore(Point(200, 50), 1200, 700, 2, playername);
     win4.wait_for_button();
-	advancedScore.show_scores();
-	advancedScore.wait_for_button();
+	//advancedScore.show_scores();
+	//advancedScore.wait_for_button();
 		
 }
 //-------------------------------------------------------------------------------
@@ -201,10 +202,10 @@ void start_window::expert()
 {
     button_pushed = true;
 	expert_window win5(Point(200,50),1200,700,"EXPERT", playername);
-	score_window expertScore(Point(200, 50), 1200, 700, "Expert Scores", 4, playername);
+	Score_Display_window expertScore(Point(200, 50), 1200, 700, 3, playername);
     win5.wait_for_button();
-	expertScore.show_scores();
-	expertScore.wait_for_button();
+	//expertScore.show_scores();
+	//expertScore.wait_for_button();
 		
 }
 //-------------------------------------------------------------------------------
@@ -215,10 +216,10 @@ void start_window::missionImpossible()
 {
     button_pushed = true;
 	missionImpossible_window win6(Point(200,50),1200,700,"MISSION IMPOSSIBLE", playername);
-	score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
+	Score_Display_window missionScore(Point(200, 50), 1200, 700, 4, playername);
     win6.wait_for_button();
-	missionScore.show_scores();
-	missionScore.wait_for_button();
+	//missionScore.show_scores();
+	//missionScore.wait_for_button();
 		
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------
