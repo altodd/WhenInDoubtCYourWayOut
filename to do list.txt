@@ -1,0 +1,4 @@
+Need to:
+1) Update the Instructions to ask for name and tell them to select a difficulty
+2) Make the text boxes part of the GUI
+3) make GUI for the actual selections

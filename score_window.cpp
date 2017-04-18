@@ -56,10 +56,7 @@ int score_window::get_level() {
 	return level;
 }
 
-void score_window::proceed() {
-	
-	button_pushed = true;
-	
+void score_window::proceed() {	
 	hide();
 }
 

@@ -21,16 +21,16 @@ using namespace Graph_lib;
 beginner_window::beginner_window(Point xy, int w, int h, const string& title, string playername) :
 	Window(xy, w, h, title),
 
-	Maroon(Point(x_max() / 5, 200), 70, 20, "Band", cb_maroon),
-	White(Point(x_max() * 2 / 5, 200), 70, 20, "Team", cb_white),
-	Black(Point(x_max() * 3 / 5, 200), 70, 20, "12th Man", cb_black),
+	Maroon(Point(x_max() / 3, 500), 70, 20, "Band", cb_maroon),
+	White(Point(x_max() / 2, 500), 70, 20, "Team", cb_white),
+	Black(Point(x_max() * 2 / 3, 500), 70, 20, "12th Man", cb_black),
 
-	scoreDisp(Point(x_max() - 70, 20), 150, 25, "Score: "),
-	computer_correct(Point(x_max() - 300, 25), 150, 25, "Percent I have guessed right: "),
+	scoreDisp(Point(0, 25), 150, 25, "Score: "),
+	computer_correct(Point(x_max() - 200, 25), 150, 25, "Percent I have guessed right: "),
 	choices_to_go(Point(x_max() - 600, 25), 150, 25, "Choices to go: "),
 
-	observation(Point(x_max() / 2, 500), "Make some choices so that I can get you figured out"),
-	guessing(Point(x_max() / 2, 500), "I will guess what you are going to select next, now"),
+	observation(Point(x_max() / 2, 200), "Make some choices so that I can get you figured out"),
+	guessing(Point(x_max() / 2, 200), "I will guess what you are going to select next, now"),
 
 	observation_period{ true },
 	playername{ playername },
@@ -42,6 +42,7 @@ beginner_window::beginner_window(Point xy, int w, int h, const string& title, st
 	attach(Maroon);
 	attach(White);
 	attach(Black);
+	choices_to_go.put(intToStr(rounds));
 }
 
 //------------------------------------------------------------------------------
@@ -99,6 +100,7 @@ void beginner_window::maroon()
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
+			choices_to_go.put(intToStr(rounds));
 		}
 		Fl::redraw();
 	}
@@ -124,7 +126,6 @@ void beginner_window::maroon()
 			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
 			missionScore.show_scores();
 			missionScore.wait_for_button();
-			button_pushed = true;
 			hide();
 		}
 		Fl::redraw();
@@ -146,6 +147,7 @@ void beginner_window::white()
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
+			choices_to_go.put(intToStr(rounds));
 		}
 		Fl::redraw();
 	}
@@ -172,7 +174,6 @@ void beginner_window::white()
 			missionScore.show_scores();
 			missionScore.wait_for_button();
 			hide();
-			button_pushed = true;
 		}
 		Fl::redraw();
 	}
@@ -193,6 +194,7 @@ void beginner_window::black()
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
+			choices_to_go.put(intToStr(rounds));
 		}
 		Fl::redraw();
 	}
@@ -218,7 +220,6 @@ void beginner_window::black()
 			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
 			missionScore.show_scores();
 			missionScore.wait_for_button();
-			button_pushed = true;
 			hide();
 		}
 		Fl::redraw();

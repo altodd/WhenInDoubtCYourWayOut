@@ -161,10 +161,9 @@ void start_window::beginner()
     button_pushed = true;
 	beginner_window win2(Point(200,50),1200,700,"BEGINNER", playername);
 	score_window begginnerScore(Point(200, 50), 1200, 700, "Beginner Scores", 1, playername);
-    win2.wait_for_button();
 	begginnerScore.show_scores();
 	begginnerScore.wait_for_button();
-		
+	win2.wait_for_button();
 }
 //-------------------------------------------------------------------------------
 
