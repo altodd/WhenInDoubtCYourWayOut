@@ -95,11 +95,24 @@ int trackScore(bool win, int score) {
 	}
 }
 
-void percentCorrect(bool win, double& timesCorrect, int& guesses) {
+double percentCorrect(bool win, double& timesCorrect, int& guesses) {
 	if (win == false) {
 		++timesCorrect;
 	}
 	double percent = 100.0 * (timesCorrect / guesses);
-	cout << "So far, I've been right " << percent << "% of the time!" << endl;
-	return;
+	return percent;
+}
+
+string intToStr(int num) {
+	stringstream out;
+	out << num;
+	string fin = out.str();
+	return fin;
+}
+
+string dubToStr(double num) {
+	stringstream out;
+	out << num;
+	string fin = out.str();
+	return fin;
 }

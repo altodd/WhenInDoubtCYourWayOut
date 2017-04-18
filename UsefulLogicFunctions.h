@@ -28,4 +28,7 @@ bool compareChoices(Choice guess, Choice user);
 
 int trackScore(bool win, int score);
 
-void percentCorrect(bool win, double& timesCorrect, int& guesses);
+double percentCorrect(bool win, double& timesCorrect, int& guesses);
+
+string intToStr(int num);
+string dubToStr(double num);
