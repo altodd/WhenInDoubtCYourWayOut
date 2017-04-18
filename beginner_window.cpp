@@ -20,9 +20,9 @@ using namespace Graph_lib;
 beginner_window::beginner_window(Point xy, int w, int h, const string& title, string playername) :
 	Window(xy, w, h, title),
 
-	Maroon(Point(x_max() / 5, 200), 70, 20, "Band", cb_maroon),
-	White(Point(x_max() * 2 / 5, 200), 70, 20, "Team", cb_white),
-	Black(Point(x_max() * 3 / 5, 200), 70, 20, "12th Man", cb_black),
+	Maroon(Point(x_max() / 3, 500), 70, 20, "Band", cb_maroon),
+	White(Point(x_max() / 2, 500), 70, 20, "Team", cb_white),
+	Black(Point(x_max() * 2 / 3, 500), 70, 20, "12th Man", cb_black),
 
 	scoreDisp(Point(x_max() - 70, 20), 150, 25, "Score: "),
 	computer_correct(Point(x_max() - 300, 25), 150, 25, "Percent I have guessed right: "),
