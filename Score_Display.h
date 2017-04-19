@@ -49,12 +49,16 @@ class Score_Display_window : public Graph_lib::Window {
     void proceed();
     
     string playername;
+
+	bool button_pushed;
      
 public:
     // constructor.
     // MAY PUT BACK! CHECK CODE TO SEE IF IT WORKS!
     //Score_Display_window(Point xy, int w, int h, int diff, mdo::user_score us);
     Score_Display_window(Point xy, int w, int h, int diff , string& playername);
+
+	bool wait_for_button();
     
     // return the difficulty level for this screen
     int get_level() { return difficulty; };

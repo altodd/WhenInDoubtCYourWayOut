@@ -119,16 +119,10 @@ void beginner_window::maroon()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            /* EDITS BEGIN HERE */
             Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
             missionScore.add(track_score);
-			/*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
-			fin_score.mdo::score_io::add(track_score);
-			score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-			missionScore.show_scores();
-			missionScore.wait_for_button();*/
-			button_pushed = true;
-			hide();
+			missionScore.redraw();
+			missionScore.show();
 		}
 		Fl::redraw();
 	}
@@ -169,16 +163,10 @@ void beginner_window::white()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            /* EDITS BEGIN HERE */
             Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
             missionScore.add(track_score);
-            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
-             fin_score.mdo::score_io::add(track_score);
-             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-             missionScore.show_scores();
-             missionScore.wait_for_button();*/
-			hide();
-			button_pushed = true;
+			missionScore.redraw();
+			missionScore.show();
 		}
 		Fl::redraw();
 	}
@@ -219,16 +207,10 @@ void beginner_window::black()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            /* EDITS BEGIN HERE */
             Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
             missionScore.add(track_score);
-            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 320 };
-             fin_score.mdo::score_io::add(track_score);
-             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-             missionScore.show_scores();
-             missionScore.wait_for_button();*/
-			button_pushed = true;
-			hide();
+			missionScore.redraw();
+			missionScore.show();
 		}
 		Fl::redraw();
 	}
