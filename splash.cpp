@@ -103,7 +103,7 @@ void splash::start()
 {
     button_pushed = true;
 	start_window win1(Point(200,50),1200,700,"START");
-	Image game_instructions(Point(25,50),"difficulty.jpg");
+	Image game_instructions(Point(25,50),"newDirections.jpg");
 	Image beginner_label(Point(x_max()/5-200,y_max()-200),"beginner.jpg");
 	Image intermediate_label(Point(((x_max())*2/5)-200,y_max()-200),"intermediate.jpg");
 	Image advanced_label(Point(((x_max())*3/5)-200,y_max()-200),"advanced.jpg");
