@@ -29,6 +29,7 @@ struct beginner_window : Graph_lib::Window {
 	double probB = 0.0;
 	double timesCorrect = 0.0;
 	string playername;
+	bool win = false;
 private:
 	Out_box scoreDisp;
 	Out_box computer_correct;
@@ -36,6 +37,8 @@ private:
 
 	Text observation;
 	Text guessing;
+	Text computerRight;
+	Text userWin;
 
 	Button Maroon;
 	Button White;
