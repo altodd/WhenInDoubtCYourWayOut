@@ -24,6 +24,20 @@ ostream& operator<<(ostream& os, const mdo::user_score& us)
 }
 
 namespace mdo {
+	/*
+	 *
+	 */
+	bool is_valid_username( string ss ) {
+		if(ss=="" || ss.size()>MAX_SIZE_NAME){
+            return false;
+        }
+		for( int i=0; i<ss.size(); i++ ) {
+            if(!(isalpha(ss.at(i)) || ( ss.at(i) >= '0' && ss.at(i) <= '9' ))) {
+                return false;
+            }
+        }
+		return true;
+	}
 
     /*
      * function to copy the scores from our file onto
@@ -107,13 +121,8 @@ namespace mdo {
         if( nn > max_score || nn < 0 ){
             throw add_args {};
         }
-        if(ss=="" || ss.size()>max_size_name){
+        if( !is_valid_username(ss) ){ 				// FIXME 
             throw add_args {};
-        }
-        for( i=0; i<ss.size(); i++ ) {
-            if(!(isalpha(ss.at(i)) || ( ss.at(i) >= '0' && ss.at(i) <= '9' ))) {
-                throw add_args {};
-            }
         }
     
         // update the member 'scores' before reading

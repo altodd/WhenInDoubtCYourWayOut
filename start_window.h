@@ -19,7 +19,10 @@ struct start_window: Graph_lib ::Window {
     bool wait_for_button(); // simple event loop
 
 	string playername;
+	
+	bool has_valid_name;
 private:
+
     In_box inboxplayername;  
 	Out_box errormessage;
 	Button getname_button;
@@ -31,16 +34,14 @@ private:
 	Button level_missionImpossible;
 	
 	bool button_pushed;     // implementation detail
-
-    static void cb_quit(Address, Address); // callback for quit_button
+	
+	static void cb_quit(Address, Address); // callback for quit_button
 	static void cb_beginner(Address, Address);
 	static void cb_intermediate(Address, Address);
 	static void cb_advanced(Address, Address);
 	static void cb_expert(Address, Address);
 	static void cb_missionImpossible(Address, Address);
 	static void cb_getname(Address, Address);
-	
-		
 	
     void quit();            // action to be done when next_button is pressed
 	void beginner();

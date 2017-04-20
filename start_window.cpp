@@ -20,7 +20,7 @@
 using namespace Graph_lib;
 //------------------------------------------------------------------------------
 
-//start_window's structure initializing the in-box for text
+//start_wFindow's structure initializing the in-box for text
 
 struct In_box: Widget
 {	
@@ -62,7 +62,8 @@ start_window::start_window(Point xy, int w, int h, const string& title) :
 	errormessage(Point ((x_max()*3/5)-50, 20), 250, 25, "Error message: "),
 	
 	
-	button_pushed(false)
+	button_pushed(false),
+	has_valid_name(false)
 {
     attach(quit_button);
 	attach(level_beginner);
@@ -158,13 +159,14 @@ void start_window::cb_getname(Address, Address pw)
 
 void start_window::beginner()
 {
-    button_pushed = true;
-	beginner_window win2(Point(200,50),1200,700,"BEGINNER", playername);
-	Score_Display_window begginnerScore(Point(200, 50), 1200, 700, 0, playername);
-    win2.wait_for_button();
-	//begginnerScore.show_scores();     // both of these are taken care of in the
-	//begginnerScore.wait_for_button(); // constructor
-		
+	if( has_valid_name ) {
+		button_pushed = true;
+		beginner_window win2(Point(200,50),1200,700,"BEGINNER", playername);
+		Score_Display_window begginnerScore(Point(200, 50), 1200, 700, 0, playername);
+		win2.wait_for_button();
+		//begginnerScore.show_scores();     // both of these are taken care of in the
+		//begginnerScore.wait_for_button(); // constructor
+	}
 }
 //-------------------------------------------------------------------------------
 
@@ -172,13 +174,14 @@ void start_window::beginner()
 
 void start_window::intermediate()
 {
-    button_pushed = true;
-	intermediate_window win3(Point(200,50),1200,700,"INTERMEDIATE", playername);
-	Score_Display_window intermediateScore(Point(200, 50), 1200, 700, 1, playername);
-    win3.wait_for_button();
-	//intermediateScore.show_scores();
-	//intermediateScore.wait_for_button();
-		
+	if( has_valid_name ) {
+		button_pushed = true;
+		intermediate_window win3(Point(200,50),1200,700,"INTERMEDIATE", playername);
+		Score_Display_window intermediateScore(Point(200, 50), 1200, 700, 1, playername);
+		win3.wait_for_button();
+		//intermediateScore.show_scores();
+		//intermediateScore.wait_for_button();
+	}	
 }
 //-------------------------------------------------------------------------------
 
@@ -186,13 +189,14 @@ void start_window::intermediate()
 
 void start_window::advanced()
 {
-    button_pushed = true;
-	advanced_window win4(Point(200,50),1200,700,"ADVANCED", playername);
-	Score_Display_window advancedScore(Point(200, 50), 1200, 700, 2, playername);
-    win4.wait_for_button();
-	//advancedScore.show_scores();
-	//advancedScore.wait_for_button();
-		
+	if( has_valid_name ) {
+		button_pushed = true;
+		advanced_window win4(Point(200,50),1200,700,"ADVANCED", playername);
+		Score_Display_window advancedScore(Point(200, 50), 1200, 700, 2, playername);
+		win4.wait_for_button();
+		//advancedScore.show_scores();
+		//advancedScore.wait_for_button();
+	}	
 }
 //-------------------------------------------------------------------------------
 
@@ -200,13 +204,14 @@ void start_window::advanced()
 
 void start_window::expert()
 {
-    button_pushed = true;
-	expert_window win5(Point(200,50),1200,700,"EXPERT", playername);
-	Score_Display_window expertScore(Point(200, 50), 1200, 700, 3, playername);
-    win5.wait_for_button();
-	//expertScore.show_scores();
-	//expertScore.wait_for_button();
-		
+	if( has_valid_name ) {
+		button_pushed = true;
+		expert_window win5(Point(200,50),1200,700,"EXPERT", playername);
+		Score_Display_window expertScore(Point(200, 50), 1200, 700, 3, playername);
+		win5.wait_for_button();
+		//expertScore.show_scores();
+		//expertScore.wait_for_button();
+	}	
 }
 //-------------------------------------------------------------------------------
 
@@ -214,13 +219,14 @@ void start_window::expert()
 
 void start_window::missionImpossible()
 {
-    button_pushed = true;
-	missionImpossible_window win6(Point(200,50),1200,700,"MISSION IMPOSSIBLE", playername);
-	Score_Display_window missionScore(Point(200, 50), 1200, 700, 4, playername);
-    win6.wait_for_button();
-	//missionScore.show_scores();
-	//missionScore.wait_for_button();
-		
+	if( has_valid_name ) {
+		button_pushed = true;
+		missionImpossible_window win6(Point(200,50),1200,700,"MISSION IMPOSSIBLE", playername);
+		Score_Display_window missionScore(Point(200, 50), 1200, 700, 4, playername);
+		win6.wait_for_button();
+		//missionScore.show_scores();
+		//missionScore.wait_for_button();
+	}	
 }
 //-------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -239,10 +245,11 @@ void start_window::getname()
 		
 		//The following if statement checks to see that filename end correctly, otherwise prints error message
 		
-		if (getplayername == "")
+		if (!mdo::is_valid_username( getplayername ))	//replace with is valid name
 		{
 		    errormessage.put("Please enter valid player name.");
 			Fl::redraw(); 
+			has_valid_name = false;
 		}
 		
 		else 
@@ -250,6 +257,7 @@ void start_window::getname()
 			playername = getplayername;
 			errormessage.put("Please select a level.");
 			Fl::redraw();
+			has_valid_name = true;
 			end = true;			
 		}
 	
