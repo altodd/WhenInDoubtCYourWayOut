@@ -13,7 +13,7 @@ try
 		
 //Adds the Instructions
 		
-		Image start_win(Point(50,50),"handmadeSplash.jpg");
+		Image start_win(Point(50,50),"splashScreen.jpg");
 	    start_win.resize_image(1100,600);
 		main_menu.attach(start_win);
 		main_menu.wait_for_button();

@@ -1,3 +1,14 @@
+/*
+   Simple_window.cpp
+   Minimally revised for C++11 features of GCC 4.6.3 or later
+   Walter C. Daugherity		June 10, 2012
+*/
+
+//
+// This is a GUI support code to the chapters 12-16 of the book
+// "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
+//
+
 #include "beginner_window.h"
 #include "UsefulLogicFunctions.h"
 #include "Score_Display.h"
@@ -13,14 +24,12 @@ beginner_window::beginner_window(Point xy, int w, int h, const string& title, st
 	White(Point(x_max() / 2, 500), 70, 20, "Team", cb_white),
 	Black(Point(x_max() * 2 / 3, 500), 70, 20, "12th Man", cb_black),
 
-	scoreDisp(Point(100, 20), 150, 25, "Score: "),
-	computer_correct(Point(x_max()/2, 25), 150, 25, "Percent I have guessed right: "),
-	choices_to_go(Point(x_max() - 300, 25), 150, 25, "Choices to go: "),
+	scoreDisp(Point(x_max() - 70, 20), 150, 25, "Score: "),
+	computer_correct(Point(x_max() - 300, 25), 150, 25, "Percent I have guessed right: "),
+	choices_to_go(Point(x_max() - 600, 25), 150, 25, "Choices to go: "),
 
-	observation(Point((x_max() / 2) - 50, 200), "Make some choices so that I can get you figured out"),
-	guessing(Point((x_max() / 2) - 50, 200), "I will guess what you are going to select next, now"),
-	computerRight(Point((x_max() / 2) - 50, 250), "Ha! I win! try again :)"),
-	userWin(Point((x_max() / 2) - 50, 250), "Well, I guess you win this time"),
+	observation(Point(x_max() / 2, 500), "Make some choices so that I can get you figured out"),
+	guessing(Point(x_max() / 2, 500), "I will guess what you are going to select next, now"),
 
 	observation_period{ true },
 	playername{ playername },
@@ -85,7 +94,6 @@ void beginner_window::maroon()
 		if (choices_left == 0) {
 			observation_period = false;
 			choices_left = rounds;
-			choices_to_go.put(intToStr(choices_left));
 			detach(observation);
 			attach(scoreDisp);
 			attach(computer_correct);
@@ -98,19 +106,7 @@ void beginner_window::maroon()
 		calcProb(choices, probM, probW, probB);
 		Choice guess = makeGuess(probM, probW, probB);
 		Choice user = charToChoice('M');
-		if (win == true) {
-			detach(userWin);
-		}
-		else {
-			detach(computerRight);
-		}
-		win = compareChoices(guess, user);
-		if (win == true) {
-			attach(userWin);
-		}
-		else {
-			attach(computerRight);
-		}
+		bool win = compareChoices(guess, user);
 		score = trackScore(win, score);
 		scoreDisp.put(intToStr(score));
 		computer_correct.put(dubToStr(percentCorrect(win, timesCorrect, guesses)));
@@ -143,7 +139,6 @@ void beginner_window::white()
 		if (choices_left == 0) {
 			observation_period = false;
 			choices_left = rounds;
-			choices_to_go.put(intToStr(choices_left));
 			detach(observation);
 			attach(scoreDisp);
 			attach(computer_correct);
@@ -155,19 +150,7 @@ void beginner_window::white()
 		calcProb(choices, probM, probW, probB);
 		Choice guess = makeGuess(probM, probW, probB);
 		Choice user = charToChoice('W');
-		if (win == true) {
-			detach(userWin);
-		}
-		else {
-			detach(computerRight);
-		}
-		win = compareChoices(guess, user);
-		if (win == true) {
-			attach(userWin);
-		}
-		else {
-			attach(computerRight);
-		}
+		bool win = compareChoices(guess, user);
 		score = trackScore(win, score);
 		scoreDisp.put(intToStr(score));
 		computer_correct.put(dubToStr(percentCorrect(win, timesCorrect, guesses)));
@@ -200,7 +183,6 @@ void beginner_window::black()
 		if (choices_left == 0) {
 			observation_period = false;
 			choices_left = rounds;
-			choices_to_go.put(intToStr(choices_left));
 			detach(observation);
 			attach(scoreDisp);
 			attach(computer_correct);
@@ -212,19 +194,7 @@ void beginner_window::black()
 		calcProb(choices, probM, probW, probB);
 		Choice guess = makeGuess(probM, probW, probB);
 		Choice user = charToChoice('B');
-		if (win == true) {
-			detach(userWin);
-		}
-		else {
-			detach(computerRight);
-		}
-		win = compareChoices(guess, user);
-		if (win == true) {
-			attach(userWin);
-		}
-		else {
-			attach(computerRight);
-		}
+		bool win = compareChoices(guess, user);
 		score = trackScore(win, score);
 		scoreDisp.put(intToStr(score));
 		computer_correct.put(dubToStr(percentCorrect(win, timesCorrect, guesses)));

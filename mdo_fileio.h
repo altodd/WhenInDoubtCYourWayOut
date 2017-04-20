@@ -88,12 +88,16 @@ using namespace std;
 
 namespace mdo { // Marcus Overzet's namespace
     const int MAX_SCORE = 320;
+	const int MAX_SIZE_NAME = 7;
     
     /* user_score */
     struct user_score {
         int score;
         String name;
     };
+	
+	// return our rules for if it is a valid username
+	bool is_valid_username( string );
 
     /* score_io */
     class score_io {
@@ -105,7 +109,7 @@ namespace mdo { // Marcus Overzet's namespace
         void write(); // write our "scores" to the file
     
         int max_score; // to change based on difficulty.
-        const int max_size_name = 7; // maximum number of characters for a username
+        const int max_size_name = MAX_SIZE_NAME; // maximum number of characters for a username
         const int num_high_scores = 5; // maximum number of scores to store
         const String default_score_file = "score_file.txt"; // default file to rw
     
@@ -120,8 +124,7 @@ namespace mdo { // Marcus Overzet's namespace
         const int get_num_high_scores() const { return num_high_scores; };
         int get_num_read_scores() const { return scores.size(); };
         const String get_default_score_file() const { return default_score_file; };
-    
-    
+	
         // default constructor uses default_score_file as our new score_file
         // alternative constructor allows user to input our new score_file
         score_io();

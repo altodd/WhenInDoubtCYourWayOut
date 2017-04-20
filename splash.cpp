@@ -35,7 +35,7 @@ bool splash::wait_for_button()
 {
     show();
     button_pushed = false;
-#if 0
+#if 1 	// changed to 1
 
     // Simpler handler
     while (!button_pushed) Fl::wait();
@@ -103,6 +103,8 @@ void splash::start()
 {
     button_pushed = true;
 	start_window win1(Point(200,50),1200,700,"START");
+	
+	/* Create images for buttons for different difficulties */
 	Image game_instructions(Point(25,50),"difficulty.jpg");
 	Image beginner_label(Point(x_max()/5-200,y_max()-200),"beginner.jpg");
 	Image intermediate_label(Point(((x_max())*2/5)-200,y_max()-200),"intermediate.jpg");
@@ -117,14 +119,19 @@ void splash::start()
 	expert_label.resize_image(150,100);
 	missionImpossible_label.resize_image(150,100);
     
+	/* attach these images  */
     win1.attach(game_instructions);
 	win1.attach(beginner_label);
 	win1.attach(intermediate_label);
 	win1.attach(advanced_label);
 	win1.attach(expert_label);
 	win1.attach(missionImpossible_label);
+	
+	// hide the current window before showing the next one and forcing us to
+	// wait for a button
+	this->hide();
+	
     win1.wait_for_button();
-		
 }
 
 
