@@ -4,9 +4,12 @@
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
+#ifndef INTERMEDIATE_WINDOW_H
+#define INTERMEDIATE_WINDOW_H
 
 #include "GUI.h"    // for Simple_window only (doesn't really belong in Window.h)
 #include "Graph.h"
+#include "Score_Display.h"
 
 using namespace Graph_lib;
 
@@ -28,6 +31,7 @@ struct intermediate_window : Graph_lib::Window {
 	double probB = 0.0;
 	double timesCorrect = 0.0;
 	string playername;
+	bool win = false;
 private:
 	Out_box scoreDisp;
 	Out_box computer_correct;
@@ -35,10 +39,14 @@ private:
 
 	Text observation;
 	Text guessing;
+	Text computerRight;
+	Text userWin;
 
 	Button Maroon;
 	Button White;
 	Button Black;
+
+	Score_Display_window uniqueScore;
 
 	bool button_pushed;     // implementation detail
 
@@ -50,6 +58,8 @@ private:
 	void white();
 	void black();
 };
+
+#endif
 
 //------------------------------------------------------------------------------
 

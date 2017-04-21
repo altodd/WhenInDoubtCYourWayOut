@@ -20,19 +20,23 @@ using namespace Graph_lib;
 expert_window::expert_window(Point xy, int w, int h, const string& title, string playername) :
 	Window(xy, w, h, title),
 
-	Maroon(Point(x_max() / 5, 200), 70, 20, "Band", cb_maroon),
-	White(Point(x_max() * 2 / 5, 200), 70, 20, "Team", cb_white),
-	Black(Point(x_max() * 3 / 5, 200), 70, 20, "12th Man", cb_black),
+	Maroon(Point(x_max() / 3, 500), 70, 20, "Band", cb_maroon),
+	White(Point(x_max() / 2, 500), 70, 20, "Team", cb_white),
+	Black(Point(x_max() * 2 / 3, 500), 70, 20, "12th Man", cb_black),
 
-	scoreDisp(Point(x_max() - 70, 20), 150, 25, "Score: "),
-	computer_correct(Point(x_max() - 300, 25), 150, 25, "Percent I have guessed right: "),
-	choices_to_go(Point(x_max() - 600, 25), 150, 25, "Choices to go: "),
+	scoreDisp(Point(100, 20), 150, 25, "Score: "),
+	computer_correct(Point(x_max() / 2, 25), 150, 25, "Percent I have guessed right: "),
+	choices_to_go(Point(x_max() - 300, 25), 150, 25, "Choices to go: "),
 
-	observation(Point(x_max() / 2, 500), "Make some choices so that I can get you figured out"),
-	guessing(Point(x_max() / 2, 500), "I will guess what you are going to select next, now"),
+	observation(Point((x_max() / 2) - 50, 200), "Make some choices so that I can get you figured out"),
+	guessing(Point((x_max() / 2) - 50, 200), "I will guess what you are going to select next, now"),
+	computerRight(Point((x_max() / 2) - 50, 250), "Ha! I win! try again :)"),
+	userWin(Point((x_max() / 2) - 50, 250), "Well, I guess you win this time"),
 
 	observation_period{ true },
 	playername{ playername },
+
+	uniqueScore(Point(200, 50), 1200, 700, 3, playername),
 
 	button_pushed(false)
 {
@@ -41,6 +45,7 @@ expert_window::expert_window(Point xy, int w, int h, const string& title, string
 	attach(Maroon);
 	attach(White);
 	attach(Black);
+	uniqueScore.hide();
 }
 
 //------------------------------------------------------------------------------
@@ -94,19 +99,32 @@ void expert_window::maroon()
 		if (choices_left == 0) {
 			observation_period = false;
 			choices_left = rounds;
+			choices_to_go.put(intToStr(choices_left));
 			detach(observation);
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
 		}
 		Fl::redraw();
-		button_pushed = true;
+		//button_pushed = true; // ??? this was in advanced_window.cpp, not here
 	}
 	else {
 		calcProb(choices, probM, probW, probB);
 		Choice guess = makeGuess(probM, probW, probB);
 		Choice user = charToChoice('M');
-		bool win = compareChoices(guess, user);
+		if (win == true) {
+			detach(userWin);
+		}
+		else {
+			detach(computerRight);
+		}
+		win = compareChoices(guess, user);
+		if (win == true) {
+			attach(userWin);
+		}
+		else {
+			attach(computerRight);
+		}
 		score = trackScore(win, score);
 		scoreDisp.put(intToStr(score));
 		computer_correct.put(dubToStr(percentCorrect(win, timesCorrect, guesses)));
@@ -119,19 +137,11 @@ void expert_window::maroon()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            /* EDITS BEGIN HERE */
-            Score_Display_window missionScore(Point(200,50),1200,700,3,playername);
-            missionScore.add(track_score);
-            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 2560 };
-             fin_score.mdo::score_io::add(track_score);
-             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-             missionScore.show_scores();
-             missionScore.wait_for_button();*/
-            // button_pushed = true; // ??? this was in beginner_window, not here
+			uniqueScore.add(track_score);
+			uniqueScore.show();
 			hide();
 		}
 		Fl::redraw();
-		button_pushed = true;
 	}
 }
 
@@ -146,19 +156,31 @@ void expert_window::white()
 		if (choices_left == 0) {
 			observation_period = false;
 			choices_left = rounds;
+			choices_to_go.put(intToStr(choices_left));
 			detach(observation);
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
 		}
 		Fl::redraw();
-		button_pushed = true;
 	}
 	else {
 		calcProb(choices, probM, probW, probB);
 		Choice guess = makeGuess(probM, probW, probB);
 		Choice user = charToChoice('W');
-		bool win = compareChoices(guess, user);
+		if (win == true) {
+			detach(userWin);
+		}
+		else {
+			detach(computerRight);
+		}
+		win = compareChoices(guess, user);
+		if (win == true) {
+			attach(userWin);
+		}
+		else {
+			attach(computerRight);
+		}
 		score = trackScore(win, score);
 		scoreDisp.put(intToStr(score));
 		computer_correct.put(dubToStr(percentCorrect(win, timesCorrect, guesses)));
@@ -171,19 +193,11 @@ void expert_window::white()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            /* EDITS BEGIN HERE */
-            Score_Display_window missionScore(Point(200,50),1200,700,3,playername);
-            missionScore.add(track_score);
-            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 2560 };
-             fin_score.mdo::score_io::add(track_score);
-             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-             missionScore.show_scores();
-             missionScore.wait_for_button();*/
-            // button_pushed = true; // ??? this was in beginner_window, not here
+			uniqueScore.add(track_score);
+			uniqueScore.show();
 			hide();
 		}
 		Fl::redraw();
-		button_pushed = true;
 	}
 }
 
@@ -198,19 +212,31 @@ void expert_window::black()
 		if (choices_left == 0) {
 			observation_period = false;
 			choices_left = rounds;
+			choices_to_go.put(intToStr(choices_left));
 			detach(observation);
 			attach(scoreDisp);
 			attach(computer_correct);
 			attach(guessing);
 		}
 		Fl::redraw();
-		button_pushed = true;
 	}
 	else {
 		calcProb(choices, probM, probW, probB);
 		Choice guess = makeGuess(probM, probW, probB);
 		Choice user = charToChoice('B');
-		bool win = compareChoices(guess, user);
+		if (win == true) {
+			detach(userWin);
+		}
+		else {
+			detach(computerRight);
+		}
+		win = compareChoices(guess, user);
+		if (win == true) {
+			attach(userWin);
+		}
+		else {
+			attach(computerRight);
+		}
 		score = trackScore(win, score);
 		scoreDisp.put(intToStr(score));
 		computer_correct.put(dubToStr(percentCorrect(win, timesCorrect, guesses)));
@@ -223,19 +249,11 @@ void expert_window::black()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            /* EDITS BEGIN HERE */
-            Score_Display_window missionScore(Point(200,50),1200,700,3,playername);
-            missionScore.add(track_score);
-            /*mdo::score_io fin_score{ "\121\WhenInDoubtCYourWayOut\GameGUI\GameGUI\beginner.txt", 2560 };
-             fin_score.mdo::score_io::add(track_score);
-             score_window missionScore(Point(200, 50), 1200, 700, "Mission Impossible Scores", 5, playername);
-             missionScore.show_scores();
-             missionScore.wait_for_button();*/
-            // button_pushed = true; // ??? this was in beginner_window, not here
+			uniqueScore.add(track_score);
+			uniqueScore.show();
 			hide();
 		}
 		Fl::redraw();
-		button_pushed = true;
 	}
 }
 

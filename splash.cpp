@@ -35,7 +35,7 @@ bool splash::wait_for_button()
 {
     show();
     button_pushed = false;
-#if 0
+#if 1
 
     // Simpler handler
     while (!button_pushed) Fl::wait();
@@ -101,7 +101,6 @@ void splash::cb_quit(Address, Address pw)
 
 void splash::start()
 {
-    button_pushed = true;
 	start_window win1(Point(200,50),1200,700,"START");
 	Image game_instructions(Point(25,50),"newDirections.jpg");
 	Image beginner_label(Point(x_max()/5-200,y_max()-200),"beginner.jpg");
@@ -123,8 +122,7 @@ void splash::start()
 	win1.attach(advanced_label);
 	win1.attach(expert_label);
 	win1.attach(missionImpossible_label);
-    win1.wait_for_button();
-		
+	win1.wait_for_button();
 }
 
 

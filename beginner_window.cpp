@@ -25,6 +25,8 @@ beginner_window::beginner_window(Point xy, int w, int h, const string& title, st
 	observation_period{ true },
 	playername{ playername },
 
+	uniqueScore(Point(200, 50), 1200, 700, 0, playername),
+
 	button_pushed(false)
 {
 	attach(choices_to_go);
@@ -32,6 +34,7 @@ beginner_window::beginner_window(Point xy, int w, int h, const string& title, st
 	attach(Maroon);
 	attach(White);
 	attach(Black);
+	uniqueScore.hide();
 }
 
 //------------------------------------------------------------------------------
@@ -122,11 +125,10 @@ void beginner_window::maroon()
 		if (choices_left == 0) {
 			mdo::user_score track_score;
 			track_score.score = score;
-			track_score.name = playername;
-            Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
-            missionScore.add(track_score);
-			missionScore.redraw();
-			missionScore.show();
+			track_score.name = playername; 
+			uniqueScore.add(track_score);
+			uniqueScore.show();
+			hide();
 		}
 		Fl::redraw();
 	}
@@ -180,10 +182,9 @@ void beginner_window::white()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
-            missionScore.add(track_score);
-			missionScore.redraw();
-			missionScore.show();
+			uniqueScore.add(track_score);
+			uniqueScore.show();
+			hide();
 		}
 		Fl::redraw();
 	}
@@ -237,10 +238,9 @@ void beginner_window::black()
 			mdo::user_score track_score;
 			track_score.score = score;
 			track_score.name = playername;
-            Score_Display_window missionScore(Point(200,50),1200,700,0,playername);
-            missionScore.add(track_score);
-			missionScore.redraw();
-			missionScore.show();
+			uniqueScore.add(track_score);
+			uniqueScore.show();
+			hide();
 		}
 		Fl::redraw();
 	}

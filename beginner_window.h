@@ -4,10 +4,12 @@
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
-
+#ifndef BEGINNER_WINDOW_H
+#define BEGINNER_WINDOW_H
 
 #include "GUI.h"    // for Simple_window only (doesn't really belong in Window.h)
 #include "Graph.h"
+#include "Score_Display.h"
 
 using namespace Graph_lib;
 
@@ -44,6 +46,8 @@ private:
 	Button White;
 	Button Black;
 
+	Score_Display_window uniqueScore;
+
 	bool button_pushed;     // implementation detail
 
 	static void cb_maroon(Address, Address);
@@ -55,4 +59,5 @@ private:
 	void black();
 };
 
+#endif
 //------------------------------------------------------------------------------
