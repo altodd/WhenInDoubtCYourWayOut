@@ -24,14 +24,16 @@ struct start_window: Graph_lib ::Window {
 private:
 
     In_box inboxplayername;  
-	Out_box errormessage;
-	Button getname_button;
+	//Out_box errormessage;
+	//Button getname_button;
     Button quit_button;     // Quit button
 	Button level_beginner;
 	Button level_intermediate;
 	Button level_advanced;
 	Button level_expert;
 	Button level_missionImpossible;
+
+	Text invalidUsername;
 	
 	bool button_pushed;     // implementation detail
 	
@@ -41,7 +43,7 @@ private:
 	static void cb_advanced(Address, Address);
 	static void cb_expert(Address, Address);
 	static void cb_missionImpossible(Address, Address);
-	static void cb_getname(Address, Address);
+	//static void cb_getname(Address, Address);
 	
     void quit();            // action to be done when next_button is pressed
 	void beginner();

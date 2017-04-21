@@ -13,8 +13,8 @@ try
 		
 //Adds the Instructions
 		
-		Image start_win(Point(50,50),"handmadeSplash.jpg");
-	    start_win.resize_image(1100,600);
+		Image start_win(Point(0,0),"handmadeSplash.jpg");
+	    start_win.resize_image(1199,699);
 		main_menu.attach(start_win);
 		main_menu.wait_for_button();
 		

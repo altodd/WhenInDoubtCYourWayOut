@@ -16,11 +16,13 @@ splash::splash(Point xy, int w, int h, const string& title) :
 //Buttons and their points for Splash window
 
 	start_button(Point(x_max()/2-50,y_max()-200), 100,70, "START", cb_start),
-	quit_button (Point (x_max()-70,0),70,20,"Quit",cb_quit),
+	quit_button (Point (x_max()-70,0),70,70,"Quit",cb_quit),
     button_pushed(false)
 {
 //Commands for attaching the buttons to the window
-	
+	Image quit(Point(x_max() - 70, 0), "quitButton.jpg");
+	quit.resize_image(70, 70);
+	attach(quit);
 	attach(start_button);
 	attach(quit_button);
 	
@@ -102,19 +104,21 @@ void splash::cb_quit(Address, Address pw)
 void splash::start()
 {
 	start_window win1(Point(200,50),1200,700,"START");
-	Image game_instructions(Point(25,50),"newDirections.jpg");
+	Image game_instructions(Point(0,0),"directionsUpdated.png");
 	Image beginner_label(Point(x_max()/5-200,y_max()-200),"beginner.jpg");
 	Image intermediate_label(Point(((x_max())*2/5)-200,y_max()-200),"intermediate.jpg");
 	Image advanced_label(Point(((x_max())*3/5)-200,y_max()-200),"advanced.jpg");
 	Image expert_label(Point(((x_max())*4/5)-200,y_max()-200),"expert.jpg");
 	Image missionImpossible_label(Point(((x_max())*5/5)-200,y_max()-200),"missionImpossible.jpg");
+	Image quitJpg(Point(x_max() - 70, 0), "quitButton.jpg");
 	
-	game_instructions.resize_image(1150,600);
+	game_instructions.resize_image(1200,700);
 	beginner_label.resize_image(150,100);
 	intermediate_label.resize_image(150,100);
 	advanced_label.resize_image(150,100);
 	expert_label.resize_image(150,100);
 	missionImpossible_label.resize_image(150,100);
+	quitJpg.resize_image(70, 70);
     
     win1.attach(game_instructions);
 	win1.attach(beginner_label);
@@ -122,6 +126,7 @@ void splash::start()
 	win1.attach(advanced_label);
 	win1.attach(expert_label);
 	win1.attach(missionImpossible_label);
+	win1.attach(quitJpg);
 	win1.wait_for_button();
 }
 
