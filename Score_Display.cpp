@@ -142,16 +142,11 @@ Score_Display_window::Score_Display_window(Point xy, int w, int h, int diff , st
     playername(playername)
 {
     // resize the font for our score Text objects
-	try {
-		score0.set_font_size(20);
-		score1.set_font_size(20);
-		score2.set_font_size(20);
-		score3.set_font_size(20);
-		score4.set_font_size(20);
-	}
-	catch (exception& e) {
-		cerr << "it done broke, on the score display window" << endl;
-	}
+	score0.set_font_size(20);
+	score1.set_font_size(20);
+	score2.set_font_size(20);
+	score3.set_font_size(20);
+	score4.set_font_size(20);
     
     title_text.set_font_size( 40 );
     

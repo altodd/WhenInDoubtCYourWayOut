@@ -59,8 +59,8 @@ start_window::start_window(Point xy, int w, int h, const string& title) :
     //getname_button(Point((x_max()*4/5)+ 60,20), 70, 20, "Get Name", cb_getname),
 	
 	//In-box and out-box for the upload window
-	inboxplayername(Point ((x_max()/2)-125, y_max()/2 - 15), 250, 25, "Enter player name: "),
-	invalidUsername(Point ((x_max()/2)-450, y_max()/2 - 17), "Please enter a username of 7 or less alphabeticical characters"),
+	inboxplayername(Point ((x_max()/2)-125, y_max()/2 - 16), 250, 25, "Enter player name: "),
+	invalidUsername(Point ((x_max()/2)-350, y_max()/2 - 17), "Please enter a username of 7 or less alphabetical characters"),
 	//errormessage(Point ((x_max()*3/5)-50, 20), 250, 25, "Error message: "),
 	
 	

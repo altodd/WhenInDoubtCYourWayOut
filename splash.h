@@ -21,7 +21,7 @@ struct splash : Graph_lib::Window
 	private:
 		                  
 		Button quit_button;                       // The quit button
-		Button start_button; 
+		Button start_button;
 		bool button_pushed;                       // Implementation detail
 
 		

@@ -37,15 +37,17 @@ private:
 	Out_box computer_correct;
 	Out_box choices_to_go;
 
-	Text observation;
-	Text guessing;
-	Text computerRight;
-	Text userWin;
+	Image observation;
+	Image guessing;
+	Image computerRight;
+	Image userWin;
+	Image background;
 
 	Button Maroon;
 	Button White;
 	Button Black;
-
+	Button Quit;
+	
 	Score_Display_window uniqueScore;
 
 	bool button_pushed;     // implementation detail
@@ -53,10 +55,12 @@ private:
 	static void cb_maroon(Address, Address);
 	static void cb_white(Address, Address);
 	static void cb_black(Address, Address);
+	static void cb_quit(Address, Address);
 
 	void maroon();
 	void white();
 	void black();
+	void quitButton();
 };
 
 #endif

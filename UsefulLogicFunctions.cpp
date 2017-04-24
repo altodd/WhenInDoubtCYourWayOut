@@ -86,11 +86,9 @@ bool compareChoices(Choice guess, Choice user) {
 
 int trackScore(bool win, int score) {
 	if (win == true) {
-		cout << "Wow! you outsmarted me! you get 10 points!" << endl;
 		return score + 10;
 	}
 	else {
-		cout << "Ha! you thought you could win! try agian." << endl;
 		return score;
 	}
 }

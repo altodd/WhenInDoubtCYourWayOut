@@ -20,18 +20,20 @@ using namespace Graph_lib;
 expert_window::expert_window(Point xy, int w, int h, const string& title, string playername) :
 	Window(xy, w, h, title),
 
-	Maroon(Point(x_max() / 3, 500), 70, 20, "Band", cb_maroon),
-	White(Point(x_max() / 2, 500), 70, 20, "Team", cb_white),
-	Black(Point(x_max() * 2 / 3, 500), 70, 20, "12th Man", cb_black),
+	Maroon(Point(790, 495), 175, 135, "Band", cb_maroon),
+	White(Point(515, 495), 175, 135, "Team", cb_white),
+	Black(Point(245, 495), 175, 135, "12th Man", cb_black),
+	Quit(Point(x_max() - 70, 0), 70, 70, "quit", cb_quit),
 
-	scoreDisp(Point(100, 20), 150, 25, "Score: "),
-	computer_correct(Point(x_max() / 2, 25), 150, 25, "Percent I have guessed right: "),
-	choices_to_go(Point(x_max() - 300, 25), 150, 25, "Choices to go: "),
+	scoreDisp(Point(403, 290), 120, 60, ""),
+	computer_correct(Point(615, 315), 170, 35, ""),
+	choices_to_go(Point(403, 139), 120, 60, ""),
 
-	observation(Point((x_max() / 2) - 50, 200), "Make some choices so that I can get you figured out"),
-	guessing(Point((x_max() / 2) - 50, 200), "I will guess what you are going to select next, now"),
-	computerRight(Point((x_max() / 2) - 50, 250), "Ha! I win! try again :)"),
-	userWin(Point((x_max() / 2) - 50, 250), "Well, I guess you win this time"),
+	observation(Point(0, 0), "observationText.png"),
+	guessing(Point(0, 0), "playingText.png"),
+	computerRight(Point(0, 0), "userLoose.png"),
+	userWin(Point(0, 0), "userWin.png"),
+	background(Point(0, 0), "gameBG.png"),
 
 	observation_period{ true },
 	playername{ playername },
@@ -41,10 +43,19 @@ expert_window::expert_window(Point xy, int w, int h, const string& title, string
 	button_pushed(false)
 {
 	attach(choices_to_go);
+	choices_to_go.put(intToStr(rounds));
 	attach(observation);
 	attach(Maroon);
 	attach(White);
 	attach(Black);
+	attach(Quit);
+	observation.resize_image(1199, 699);
+	computerRight.resize_image(1199, 699);
+	guessing.resize_image(1199, 699);
+	userWin.resize_image(1199, 699);
+	background.resize_image(1199, 699);
+	attach(background);
+	attach(observation);
 	uniqueScore.hide();
 }
 
@@ -86,7 +97,16 @@ void expert_window::cb_black(Address, Address pw)
 	reference_to<expert_window>(pw).black();
 }
 
+void expert_window::cb_quit(Address, Address pw)
+{
+	reference_to<expert_window>(pw).quitButton();
+}
+
 //------------------------------------------------------------------------------
+void expert_window::quitButton()
+{
+	exit(0);
+}
 
 void expert_window::maroon()
 {

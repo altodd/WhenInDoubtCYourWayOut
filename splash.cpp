@@ -20,9 +20,6 @@ splash::splash(Point xy, int w, int h, const string& title) :
     button_pushed(false)
 {
 //Commands for attaching the buttons to the window
-	Image quit(Point(x_max() - 70, 0), "quitButton.jpg");
-	quit.resize_image(70, 70);
-	attach(quit);
 	attach(start_button);
 	attach(quit_button);
 	
@@ -112,7 +109,7 @@ void splash::start()
 	Image missionImpossible_label(Point(((x_max())*5/5)-200,y_max()-200),"missionImpossible.jpg");
 	Image quitJpg(Point(x_max() - 70, 0), "quitButton.jpg");
 	
-	game_instructions.resize_image(1200,700);
+	game_instructions.resize_image(1199,699);
 	beginner_label.resize_image(150,100);
 	intermediate_label.resize_image(150,100);
 	advanced_label.resize_image(150,100);
